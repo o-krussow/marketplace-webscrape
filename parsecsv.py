@@ -42,7 +42,9 @@ def latest_output_filename(directory):
 
 if __name__ == "__main__":
     
-    df = pd.read_csv(latest_output_filename("/home/cloud9/Projects/Webscrape/results/"))
+    results_directory = "/home/owen/Workspace/python/marketplace-webscrape/results/"
+    
+    df = pd.read_csv(latest_output_filename(results_directory))
     
     di = df.to_dict()
     
@@ -51,7 +53,7 @@ if __name__ == "__main__":
     output = ""
     
     output+="\n\n\n\n-------------------------------------------------------------------NEW ENTRIES--------------------------------------------------------------------\n\n\n\n"
-    output+=(compare_csv(pd.read_csv(second_latest_output_filename("/home/cloud9/Projects/Webscrape/results/")), pd.read_csv(latest_output_filename("/home/cloud9/Projects/Webscrape/results/"))))
+    output+=(compare_csv(pd.read_csv(second_latest_output_filename(results_directory)), pd.read_csv(latest_output_filename(results_directory))))
     
     output+="\n\n\n\n-------------------------------------------------------------------ALL ENTRIES--------------------------------------------------------------------\n\n\n\n"
     for row in range(len(di['Price'])):
@@ -61,7 +63,7 @@ if __name__ == "__main__":
                 output+="\n"*2
     
     
-    #send_email("okrussow@gmail.com", output.encode('utf-8'))
+    send_email("okrussow@gmail.com", output.encode('utf-8'))
     
 
     print(output)

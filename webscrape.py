@@ -34,13 +34,13 @@ def scrape_marketplace(ilinks, usedb):
         
         results = soup.find('div', class_='bq4bzpyk j83agx80 btwxx1t3 lhclo0ds jifvfom9 muag1w35 dlv3wnog enqfppq2 rl04r1d5')
         
-        listings = results.find_all('div', class_='b3onmgus ph5uu5jm g5gj957u buofh1pr cbu4d94t rj1gh0hx j83agx80 rq0escxv n1dktuyu ecm0bbzt e5nlhep0')
+        listings = results.find_all('div', class_='b3onmgus ph5uu5jm g5gj957u buofh1pr cbu4d94t rj1gh0hx j83agx80 rq0escxv fnqts5cd fo9g3nie n1dktuyu e5nlhep0 ecm0bbzt')
         
         for listing in listings:
-            name = listing.find('div', class_='l9j0dhe7 stjgntxs ni8dbmo4')
-            price = listing.find('span', class_='oi732d6d ik7dh3pa d2edcug0 qv66sw1b c1et5uql a8c37x1j s89635nw ew0dbk1b a5q79mjw g1cxx5fr lrazzd5p oo9gr5id')
+            name = listing.find('span', class_='a8c37x1j ni8dbmo4 stjgntxs l9j0dhe7')
+            price = listing.find('span', class_='d2edcug0 hpfvmrgz qv66sw1b c1et5uql b0tq1wua a8c37x1j keod5gw0 nxhoafnm aigsh9s9 tia6h79c fe6kdd0r mau55g9w c8b282yb iv3no6db a5q79mjw g1cxx5fr lrazzd5p oo9gr5id')
             try:
-                location, mileage = listing.find_all('span', class_='oi732d6d ik7dh3pa d2edcug0 qv66sw1b c1et5uql a8c37x1j hop8lmos enqfppq2 e9vueds3 j5wam9gi knj5qynh m9osqain ni8dbmo4 stjgntxs ltmttdrg g0qnabr5')
+                location, mileage = listing.find_all('span', class_='a8c37x1j ni8dbmo4 stjgntxs l9j0dhe7 ltmttdrg g0qnabr5')
             except ValueError as e:
                 continue
             link = listing.find('a', class_='oajrlxb2 g5ia77u1 qu0x051f esr5mh6w e9989ue4 r7d6kgcz rq0escxv nhd2j8a9 nc684nl6 p7hjln8o kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x jb3vyjys rz4wbd8a qt6c0cv9 a8nywdso i1ao9s8h esuyzwwr f1sip0of lzcic4wl gmql0nx0 p8dawk7l').attrs['href']
@@ -60,7 +60,7 @@ def scrape_marketplace(ilinks, usedb):
         
     df = pd.DataFrame(cars, columns = ['Name', 'Price', 'Location', 'Mileage', 'Link', 'Hash'])
     print(df)
-    df.to_csv('/home/cloud9/Projects/Webscrape/results/out'+str(datetime.datetime.now().year)+str(datetime.datetime.now().day)+str(datetime.datetime.now().hour)+str(datetime.datetime.now().minute)+'.csv')
+    df.to_csv('/home/owen/Workspace/python/marketplace-webscrape/results/out'+str(datetime.datetime.now().year)+str(datetime.datetime.now().day)+str(datetime.datetime.now().hour)+str(datetime.datetime.now().minute)+'.csv')
     
     driver.quit()     
     return(df)
